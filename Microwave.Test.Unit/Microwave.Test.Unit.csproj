@@ -61,7 +61,6 @@
     <Compile Include="DisplayTest.cs" />
     <Compile Include="DoorTest.cs" />
     <Compile Include="LightTest.cs" />
-    <Compile Include="OutputTest.cs" />
     <Compile Include="PowerTubeTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TimerTest.cs" />
