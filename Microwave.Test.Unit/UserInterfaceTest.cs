@@ -41,6 +41,7 @@ namespace Microwave.Test.Unit
                 cooker);
         }
 
+        //1
         [Test]
         public void Ready_DoorOpen_LightOn()
         {
@@ -50,6 +51,7 @@ namespace Microwave.Test.Unit
             light.Received().TurnOn();
         }
 
+        //2
         [Test]
         public void DoorOpen_DoorClose_LightOff()
         {
@@ -60,6 +62,7 @@ namespace Microwave.Test.Unit
             light.Received().TurnOff();
         }
 
+        //3
         [Test]
         public void Ready_DoorOpenClose_Ready_PowerIs50()
         {
@@ -71,7 +74,7 @@ namespace Microwave.Test.Unit
             powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             display.Received(1).ShowPower(Arg.Is<int>(50));
         }
-
+        //4
         [Test]
         public void Ready_2PowerButton_PowerIs100()
         {
@@ -79,7 +82,7 @@ namespace Microwave.Test.Unit
             powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             display.Received(1).ShowPower(Arg.Is<int>(100));
         }
-
+        //5
         [Test]
         public void Ready_15PowerButton_PowerIs50Again()
         {
@@ -91,7 +94,7 @@ namespace Microwave.Test.Unit
             powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             display.Received(2).ShowPower(50);
         }
-
+        //6
         [Test]
         public void SetPower_CancelButton_DisplayCleared()
         {
@@ -102,7 +105,7 @@ namespace Microwave.Test.Unit
 
             display.Received(1).Clear();
         }
-
+        //7
         [Test]
         public void SetPower_DoorOpened_DisplayCleared()
         {
@@ -113,7 +116,7 @@ namespace Microwave.Test.Unit
 
             display.Received(1).Clear();
         }
-
+        //8
         [Test]
         public void SetPower_DoorOpened_LightOn()
         {
@@ -124,7 +127,7 @@ namespace Microwave.Test.Unit
 
             light.Received(1).TurnOn();
         }
-
+        //9
         [Test]
         public void SetPower_TimeButton_TimeIs1()
         {
@@ -135,7 +138,7 @@ namespace Microwave.Test.Unit
 
             display.Received(1).ShowTime(Arg.Is<int>(1), Arg.Is<int>(0));
         }
-
+        //10
         [Test]
         public void SetPower_2TimeButton_TimeIs2()
         {
@@ -146,7 +149,7 @@ namespace Microwave.Test.Unit
 
             display.Received(1).ShowTime(Arg.Is<int>(2), Arg.Is<int>(0));
         }
-
+        //11
         [Test]
         public void SetTime_StartButton_CookerIsCalled()
         {
@@ -158,7 +161,7 @@ namespace Microwave.Test.Unit
 
             cooker.Received(1).StartCooking(50, 60);
         }
-
+        //12
         [Test]
         public void SetTime_DoorOpened_DisplayCleared()
         {
@@ -170,7 +173,7 @@ namespace Microwave.Test.Unit
 
             display.Received().Clear();
         }
-
+        //13
         [Test]
         public void SetTime_DoorOpened_LightOn()
         {
@@ -182,7 +185,7 @@ namespace Microwave.Test.Unit
 
             light.Received().TurnOn();
         }
-
+        //14
         [Test]
         public void Ready_PowerAndTime_CookerIsCalledCorrectly()
         {
@@ -199,7 +202,7 @@ namespace Microwave.Test.Unit
 
             cooker.Received(1).StartCooking(100, 120);
         }
-
+        //15
         [Test]
         public void Ready_FullPower_CookerIsCalledCorrectly()
         {
@@ -218,7 +221,7 @@ namespace Microwave.Test.Unit
 
         }
 
-
+        //16
         [Test]
         public void SetTime_StartButton_LightIsCalled()
         {
@@ -231,7 +234,7 @@ namespace Microwave.Test.Unit
 
             light.Received(1).TurnOn();
         }
-
+        //17
         [Test]
         public void Cooking_CookingIsDone_LightOff()
         {
@@ -245,7 +248,7 @@ namespace Microwave.Test.Unit
             uut.CookingIsDone();
             light.Received(1).TurnOff();
         }
-
+        //18
         [Test]
         public void Cooking_CookingIsDone_ClearDisplay()
         {
@@ -258,7 +261,7 @@ namespace Microwave.Test.Unit
 
             display.Received(1).Clear();
         }
-
+        //19
         [Test]
         public void Cooking_DoorIsOpened_CookerCalled()
         {
@@ -274,7 +277,7 @@ namespace Microwave.Test.Unit
 
             cooker.Received(1).Stop();
         }
-
+        //20
         [Test]
         public void Cooking_CancelButton_CookerCalled()
         {
@@ -290,7 +293,7 @@ namespace Microwave.Test.Unit
 
             cooker.Received(1).Stop();
         }
-
+        //21
         [Test]
         public void Cooking_CancelButton_LightCalled()
         {

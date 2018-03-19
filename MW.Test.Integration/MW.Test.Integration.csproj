@@ -56,7 +56,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IT1_CookcontrollerTimer.cs" />
+    <Compile Include="IT1_Cookcontroller.cs" />
+    <Compile Include="IT2_UserInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
