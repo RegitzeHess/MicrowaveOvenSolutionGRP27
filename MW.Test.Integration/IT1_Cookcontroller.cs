@@ -32,13 +32,14 @@ namespace MW.Test.Integration
         public void SetUp()
         {
          
-            _userInterface = Substitute.For<UserInterface>();
+            
             _output = Substitute.For<IOutput>();
 
             _timer = new Timer();
             _display = new Display(_output);
             _powertube = new PowerTube(_output);
-        
+
+            _userInterface = Substitute.For<IUserInterface>();
             _uut = new CookController(_timer, _display, _powertube) {UI = _userInterface};
         }
        
@@ -67,9 +68,9 @@ namespace MW.Test.Integration
         [Test]
         public void Cooking_AfterOneTick_DisplayShowsTheNewTime()
         {
-           _uut.StartCooking(100, 2000);
-            Thread.Sleep(2003); //DEN HER VÆRDI ER JEG I TVIVL OM
-            _output.Received().OutputLine(Arg.Is<string>(_string => _string.ToLower().Contains("00:02")));
+           _uut.StartCooking(100, 2500);
+            Thread.Sleep(2003); 
+            _output.Received().OutputLine(Arg.Is<string>(_string => _string.ToLower().Contains("00:01")));
             _output.Received().OutputLine(Arg.Is<string>(_string => _string.Contains("00:00")));
             Thread.Sleep(500);
             _output.Received().OutputLine("PowerTube turned off");
@@ -79,8 +80,8 @@ namespace MW.Test.Integration
         [Test]
         public void Cooking_TimerExpired_PowerTubeOff()
         {
-            _uut.StartCooking(100,2000);
-            Thread.Sleep(2001);
+            _uut.StartCooking(100, 2000);
+            Thread.Sleep(2100);
             _output.Received().OutputLine("PowerTube turned off"); //HVOR LÆSES HVAD DER UDSKRIVES I OUTPUT?
         }
 
@@ -90,7 +91,7 @@ namespace MW.Test.Integration
         public void Cooking_TimerExpired_UICalled()
         {
             _uut.StartCooking(100, 2000);
-            Thread.Sleep(2001);
+            Thread.Sleep(2005);
             _userInterface.Received().CookingIsDone();
         }
 
