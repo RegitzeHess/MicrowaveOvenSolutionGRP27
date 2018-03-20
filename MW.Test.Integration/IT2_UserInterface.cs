@@ -37,10 +37,10 @@ namespace MW.Test.Integration
             _powertube = new PowerTube(_output);
             _timer = new Timer();
 
-            _door = Substitute.For<Door>();
-            _powerbutton = Substitute.For<Button>();
-            _timebutton = Substitute.For<Button>();
-            _startcancel = Substitute.For<Button>();
+            _door = Substitute.For<IDoor>();
+            _powerbutton = Substitute.For<IButton>();
+            _timebutton = Substitute.For<IButton>();
+            _startcancel = Substitute.For<IButton>();
 
             _cookcontroller = new CookController(_timer, _display, _powertube) { UI = _uut };
             _uut = new UserInterface(_powerbutton, _timebutton, _startcancel, _door, _display, _light, _cookcontroller);

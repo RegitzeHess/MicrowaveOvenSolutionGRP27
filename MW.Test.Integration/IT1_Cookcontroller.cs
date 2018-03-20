@@ -68,7 +68,8 @@ namespace MW.Test.Integration
         [Test]
         public void Cooking_AfterOneTick_DisplayShowsTheNewTime()
         {
-           _uut.StartCooking(100, 2500);
+            //DENNE TEST FEJLEDE, DA DER VAR FEJL I COOKCONTROLLER OG TIMERS FORSTÅELSE AF TID. ÆNDREDE I CONTROLLEREN
+           _uut.StartCooking(100, 2);
             Thread.Sleep(2003); 
             _output.Received().OutputLine(Arg.Is<string>(_string => _string.ToLower().Contains("00:01")));
             _output.Received().OutputLine(Arg.Is<string>(_string => _string.Contains("00:00")));
