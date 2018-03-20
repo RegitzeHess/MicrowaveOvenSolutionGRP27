@@ -58,6 +58,7 @@ namespace MW.Test.Integration
         [Test]
         public void DoorOpen_DoorClose_LightOff()
         {
+            _door.Open();
             _door.Close();
             _output.Received().OutputLine("Light is turned off");
         }
