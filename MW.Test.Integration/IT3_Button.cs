@@ -39,8 +39,9 @@ namespace MW.Test.Integration
             _uutPowerButton = new Button();
             _uutTimeButton = new Button();
             _uutStartCancel = new Button();
-            _cookController = new CookController(_timer, _display, _powerTube) { UI = _userInterface };
-            _userInterface = new UserInterface(_uutPowerButton, _uutTimeButton, _uutStartCancel, _door, _display, _light, _cookController);
+            _cookController = new CookController(_timer, _display, _powerTube) {UI = _userInterface};
+            _userInterface = new UserInterface(_uutPowerButton, _uutTimeButton, _uutStartCancel, _door, _display,
+                _light, _cookController);
         }
 
         [Test]
@@ -81,7 +82,5 @@ namespace MW.Test.Integration
             _output.Received().OutputLine("Display shows: 50 W");
         }
 
-        [Test]
-        public void 
     }
 }

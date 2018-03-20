@@ -74,6 +74,7 @@ namespace MW.Test.Integration
         public void Ready_2PowerButtonIsPressed_PowerIs100()
         {
             _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             _timebutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             _output.Received().OutputLine("Display shows: 100 W");
         }
@@ -105,6 +106,9 @@ namespace MW.Test.Integration
         [Test]
         public void SetPower_CancelButton_DisplayCleared()
         {
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _startcancel.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _output.Received().OutputLine("Display cleared");
 
         }
 
@@ -112,14 +116,18 @@ namespace MW.Test.Integration
         [Test]
         public void SetPower_DoorOpened_DisplayCleared()
         {
-            
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _door.Opened += Raise.EventWith(this, EventArgs.Empty);
+            _output.Received().OutputLine("Display cleared");
         }
 
         //8
         [Test]
         public void SetPower_DoorOpened_LightOn()
         {
-            
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _door.Opened += Raise.EventWith(this, EventArgs.Empty);
+            _output.Received().OutputLine("Light is turned on");
         }
 
         //9
@@ -157,14 +165,23 @@ namespace MW.Test.Integration
         [Test]
         public void SetTime_DoorOpened_DisplayCleared()
         {
-            
+
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _timebutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _door.Opened += Raise.EventWith(this, EventArgs.Empty);
+            _output.Received().OutputLine("Display cleared");
+
         }
 
         //13
         [Test]
         public void SetTime_DoorOpened_LightOn()
         {
-            
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _timebutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _door.Opened += Raise.EventWith(this, EventArgs.Empty);
+            _output.Received().OutputLine("Light is turned on");
+
         }
         
         //14
@@ -177,14 +194,33 @@ namespace MW.Test.Integration
             _timebutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             _startcancel.Pressed += Raise.EventWith(this, EventArgs.Empty);
             Thread.Sleep(100);
-            _output.Received().OutputLine("PowerTube works with ? %"); //HVAD SKAL DER STÅ HER? METODEN REGNER IKKE OM I %?
+            _output.Received().OutputLine("PowerTube works with 14 %"); 
         }
 
         //15
         [Test]
         public void Ready_FullPower_CookerIsCalledCorrectly()
         {
-            
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _timebutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _startcancel.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            Thread.Sleep(100);
+            _output.Received().OutputLine("PowerTube works with 100 %");
+
+
         }
 
         //16
@@ -201,7 +237,12 @@ namespace MW.Test.Integration
         [Test]
         public void Cooking_CookingIsDone_LightOff()
         {
-            
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _timebutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _startcancel.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            Thread.Sleep(60700);
+            _output.Received().OutputLine("Light is turned off");
+
         }
 
         //18
@@ -219,14 +260,23 @@ namespace MW.Test.Integration
         [Test]
         public void Cooking_DoorIsOpened_CookerCalled()
         {
-            
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _timebutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _startcancel.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _door.Opened += Raise.EventWith(this, EventArgs.Empty);
+            _output.Received().OutputLine("Light is turned on");
+
         }
 
         //20
         [Test]
         public void Cooking_CancelButton_CookerCalled()
         {
-            
+            _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _timebutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _startcancel.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _startcancel.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            _output.Received().OutputLine("Light is turned off");
         }
 
         //21
@@ -236,7 +286,9 @@ namespace MW.Test.Integration
             _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             _timebutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             _startcancel.Pressed += Raise.EventWith(this, EventArgs.Empty);
-            Thread.Sleep(60200); //sætter til 1 min og 2 millisek
+            //Thread.Sleep(60500); //sætter til 1 min og 2 millisek
+            _startcancel.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            Thread.Sleep(500);
             _output.Received().OutputLine("Light is turned off");
             
         }
