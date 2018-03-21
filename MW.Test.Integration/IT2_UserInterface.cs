@@ -76,7 +76,6 @@ namespace MW.Test.Integration
         {
             _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
-            _timebutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             _output.Received().OutputLine("Display shows: 100 W");
         }
         //5
@@ -101,8 +100,7 @@ namespace MW.Test.Integration
             _output.Received().OutputLine("Display shows: 50 W");
         }
 
-        //I UNITTESTENE ER DER 6, 7, OG 8 FOR SETPOWER DER TESTER AT DISPLAY BLIVER CLEARED NÅR DØR ÅBNER ELLER 
-        //CANCEL OG AT LYS TÆNDES NÅR DØR ÅBNER
+       
         //6
         [Test]
         public void SetPower_CancelButton_DisplayCleared()
@@ -157,7 +155,7 @@ namespace MW.Test.Integration
             _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             _timebutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             _startcancel.Pressed += Raise.EventWith(this, EventArgs.Empty);
-            Thread.Sleep(61000); //sætter til 1 min og 1 millisek
+            Thread.Sleep(61000); 
             _output.Received().OutputLine("PowerTube turned off");
 
         }
@@ -287,15 +285,13 @@ namespace MW.Test.Integration
             _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             _timebutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             _startcancel.Pressed += Raise.EventWith(this, EventArgs.Empty);
-            //Thread.Sleep(60500); //sætter til 1 min og 2 millisek
             _startcancel.Pressed += Raise.EventWith(this, EventArgs.Empty);
             Thread.Sleep(500);
             _output.Received().OutputLine("Light is turned off");
             
         }
 
-        
-        //MAIKEN HAR EN TEST HVOR HUN TESTER AT TIDEN GÅR NÅR COOKER ER I GANG?
+      
 
     }
 }

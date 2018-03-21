@@ -276,7 +276,6 @@ namespace MW.Test.Integration
             _uutPowerButton.Press();
             _uutTimeButton.Press();
             _uutStartCancel.Press();
-            //Thread.Sleep(60500); //sætter til 1 min og 2 millisek
             _uutStartCancel.Press();
             Thread.Sleep(500);
             _output.Received().OutputLine("Light is turned off");

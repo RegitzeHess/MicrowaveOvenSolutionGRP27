@@ -70,7 +70,7 @@ namespace MW.Test.Integration
         {
             //DENNE TEST FEJLEDE, DA DER VAR FEJL I COOKCONTROLLER OG TIMERS FORSTÅELSE AF TID. ÆNDREDE I CONTROLLEREN
            _uut.StartCooking(100, 2);
-            Thread.Sleep(2003); 
+            Thread.Sleep(2000); 
             _output.Received().OutputLine(Arg.Is<string>(_string => _string.ToLower().Contains("00:01")));
             _output.Received().OutputLine(Arg.Is<string>(_string => _string.Contains("00:00")));
             Thread.Sleep(500);
@@ -83,7 +83,7 @@ namespace MW.Test.Integration
         {
             _uut.StartCooking(100, 2);
             Thread.Sleep(2100);
-            _output.Received().OutputLine("PowerTube turned off"); //HVOR LÆSES HVAD DER UDSKRIVES I OUTPUT?
+            _output.Received().OutputLine("PowerTube turned off"); 
         }
 
 
@@ -105,14 +105,9 @@ namespace MW.Test.Integration
             _uut.StartCooking(100,2);
             Thread.Sleep(2001);
             _uut.Stop();
-            _output.Received().OutputLine("PowerTube turned off"); //HVOR LÆSES HVAD DER UDSKRIVES I OUTPUT?
+            _output.Received().OutputLine("PowerTube turned off"); 
         }
 
-        //JEG VED IKKE OM VI SKAL LAVE DEM HER - MAIKEN HAR MEN DE ER IKKE I UNITTEST MEN DET ER LOGGER STÅR
-        //OVERALT I SEKVENSDIAGRAMMET
-
-        //mikroovn bruges allerede
-
-        //for hvert tick bliver loggeren kaldt
+      
     }
 }
