@@ -45,19 +45,19 @@ namespace MW.Test.Integration
        
         //test om cooking starter med valide værdier
         [Test]
-        public void StartCooking_100power_2000time_IsValid()
+        public void StartCooking_100power_2time_IsValid()
         {
             _uut.StartCooking(100, 2);
 
-            _output.Received().OutputLine(Arg.Is<string>(_string => _string.ToLower().Contains("works") && _string.ToLower().Contains("100")));
+            _output.Received().OutputLine(Arg.Is<string>(_string => _string.ToLower().Contains("works") && _string.ToLower().Contains("2")));
         }
-        //HVORFOR WORKS OG 100?
+       
 
-        //for lav, for høj eller ugyldig power
+        //for lav eller for høj  power
 
         [TestCase(0, 2)]
         [TestCase(800, 2)]
-        [TestCase(110, 2)]
+      
 
         public void StartCooking_TooHighOrTooLowOrInvalidPower(int power, int time)
         {
