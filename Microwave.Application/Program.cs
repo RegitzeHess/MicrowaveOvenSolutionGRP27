@@ -18,6 +18,8 @@ namespace Microwave.Application
         {
             //IT4_Output
 
+            //Vi har udkommenteret nogle af testene, da de tager lang tid at køre
+
             var _output = new Output();
             var _light = new Light(_output);
             var _display = new Display(_output);
@@ -29,6 +31,7 @@ namespace Microwave.Application
             var _startcancel = new Button();
             var _cookcontroller = new CookController(_timer, _display, _powertube);
             var _userinterface = new UserInterface(_powerbutton , _timebutton, _startcancel, _door, _display, _light, _cookcontroller);
+            _cookcontroller.UI = _userinterface;
 
             ManualResetEvent pause = new ManualResetEvent(false);
 
@@ -152,6 +155,98 @@ namespace Microwave.Application
             _startcancel.Press();
             Console.WriteLine();
 
+            //13
+            Console.WriteLine("SetTime_DoorOpened_LightOn");
+            _powerbutton.Press();
+            _timebutton.Press();
+            _door.Open();
+            Console.WriteLine();
+
+            //nulstiller dør og power
+            _door.Close();
+            _startcancel.Press();
+            Console.WriteLine();
+
+            ////14
+            //Console.WriteLine("Ready_PowerAndTime_CookerIsCalledCorectly");
+            //_powerbutton.Press();
+            //_powerbutton.Press();
+            //_timebutton.Press();
+            //_timebutton.Press();
+            //_startcancel.Press();
+            //pause.WaitOne(100);
+            //Console.WriteLine();
+
+            ////nulstiller
+            //pause.WaitOne(121000);
+
+            ////15
+            //Console.WriteLine("Ready_FullPower_CookerIsCalledCorectly");
+            //_powerbutton.Press();
+            //_powerbutton.Press();
+            //_powerbutton.Press();
+            //_powerbutton.Press();
+            //_powerbutton.Press();
+            //_powerbutton.Press();
+            //_powerbutton.Press();
+            //_powerbutton.Press();
+            //_powerbutton.Press();
+            //_powerbutton.Press();
+            //_powerbutton.Press();
+            //_powerbutton.Press();
+            //_powerbutton.Press();
+            //_powerbutton.Press();
+            //_timebutton.Press();
+            //_startcancel.Press();
+            //pause.WaitOne(100);
+            //Console.WriteLine();
+
+            ////17
+            //Console.WriteLine("Cooking_CookingIsDone_LightOff");
+            //pause.WaitOne(60100);
+            
+            //16
+            Console.WriteLine("SetTime_StartButton_LightIsCalled");
+            _powerbutton.Press();
+            _timebutton.Press();
+            _startcancel.Press();
+            Console.WriteLine();
+
+            ////18
+            //Console.WriteLine("Cooking_CookingIsDone_DisplayCleared");
+            //_powerbutton.Press();
+            //_timebutton.Press();
+            //_startcancel.Press();
+            //pause.WaitOne(60300);
+            //Console.WriteLine();
+
+            
+            //19
+            Console.WriteLine("Cooking_DoorIsOpen_CookerCalled");
+            _powerbutton.Press();
+            _timebutton.Press();
+            _startcancel.Press();
+            _door.Open();
+            Console.WriteLine();
+
+            //nulstille dør
+            _door.Close();
+
+            //20
+            Console.WriteLine("Cooking_cancelButton_CookerCalled");
+            _powerbutton.Press();
+            _timebutton.Press();
+            _startcancel.Press();
+            _startcancel.Press();
+            Console.WriteLine();
+
+            //21
+            Console.WriteLine("Cooking_CancelBotton_lightCalled");
+            _powerbutton.Press();
+            _timebutton.Press();
+            _startcancel.Press();
+            _startcancel.Press();
+            Console.WriteLine();
         }
     }
 }
