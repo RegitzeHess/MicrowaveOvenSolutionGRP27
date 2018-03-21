@@ -29,7 +29,7 @@ namespace MW.Test.Integration
         private IButton _uutPowerButton;
         private IButton _uutTimeButton;
         private IButton _uutStartCancel;
-        private ICookController _cookController;
+        private CookController _cookController;
         private IUserInterface _userInterface;
 
         [SetUp]
@@ -44,8 +44,9 @@ namespace MW.Test.Integration
             _uutPowerButton = new Button();
             _uutTimeButton = new Button();
             _uutStartCancel = new Button();
-            _cookController = new CookController(_timer, _display, _powerTube) { UI = _userInterface };
+            _cookController = new CookController(_timer, _display, _powerTube);
             _userInterface = new UserInterface(_uutPowerButton, _uutTimeButton, _uutStartCancel, _door, _display, _light, _cookController);
+            _cookController.UI = _userInterface;
         }
 
         //1
@@ -146,7 +147,7 @@ namespace MW.Test.Integration
             _uutStartCancel.Press();
             Thread.Sleep(5000);
             _output.Received().OutputLine("Display shows: 00:56");
-            Thread.Sleep(55200);
+            Thread.Sleep(56000);
             _output.Received().OutputLine("PowerTube turned off");
         }
 

@@ -47,7 +47,7 @@ namespace MW.Test.Integration
         [Test]
         public void StartCooking_100power_2000time_IsValid()
         {
-            _uut.StartCooking(100, 2000);
+            _uut.StartCooking(100, 2);
 
             _output.Received().OutputLine(Arg.Is<string>(_string => _string.ToLower().Contains("works") && _string.ToLower().Contains("100")));
         }
@@ -55,9 +55,9 @@ namespace MW.Test.Integration
 
         //for lav, for høj eller ugyldig power
 
-        [TestCase(0, 2000)]
-        [TestCase(800, 2000)]
-        [TestCase(110, 2000)]
+        [TestCase(0, 2)]
+        [TestCase(800, 2)]
+        [TestCase(110, 2)]
 
         public void StartCooking_TooHighOrTooLowOrInvalidPower(int power, int time)
         {
@@ -81,7 +81,7 @@ namespace MW.Test.Integration
         [Test]
         public void Cooking_TimerExpired_PowerTubeOff()
         {
-            _uut.StartCooking(100, 2000);
+            _uut.StartCooking(100, 2);
             Thread.Sleep(2100);
             _output.Received().OutputLine("PowerTube turned off"); //HVOR LÆSES HVAD DER UDSKRIVES I OUTPUT?
         }
@@ -91,8 +91,8 @@ namespace MW.Test.Integration
         [Test]
         public void Cooking_TimerExpired_UICalled()
         {
-            _uut.StartCooking(100, 2000);
-            Thread.Sleep(2005);
+            _uut.StartCooking(100, 2);
+            Thread.Sleep(2100);
             _userInterface.Received().CookingIsDone();
         }
 
@@ -102,7 +102,7 @@ namespace MW.Test.Integration
         [Test]
         public void Cooking_Stop_DisplayShowsThatPowerTubeIsStoped()
         {
-            _uut.StartCooking(100,2000);
+            _uut.StartCooking(100,2);
             Thread.Sleep(2001);
             _uut.Stop();
             _output.Received().OutputLine("PowerTube turned off"); //HVOR LÆSES HVAD DER UDSKRIVES I OUTPUT?

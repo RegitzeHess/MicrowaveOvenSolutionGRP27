@@ -25,7 +25,7 @@ namespace MW.Test.Integration
         private IButton _powerbutton;
         private IButton _timebutton;
         private IButton _startcancel;
-        private ICookController _cookcontroller;
+        private CookController _cookcontroller;
         private UserInterface _uut;
 
         [SetUp]
@@ -42,8 +42,9 @@ namespace MW.Test.Integration
             _timebutton = Substitute.For<IButton>();
             _startcancel = Substitute.For<IButton>();
 
-            _cookcontroller = new CookController(_timer, _display, _powertube) { UI = _uut };
+            _cookcontroller = new CookController(_timer, _display, _powertube);
             _uut = new UserInterface(_powerbutton, _timebutton, _startcancel, _door, _display, _light, _cookcontroller);
+            _cookcontroller.UI = _uut;
         }
         
         //1
@@ -156,7 +157,7 @@ namespace MW.Test.Integration
             _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             _timebutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             _startcancel.Pressed += Raise.EventWith(this, EventArgs.Empty);
-            Thread.Sleep(60100); //sætter til 1 min og 1 millisek
+            Thread.Sleep(61000); //sætter til 1 min og 1 millisek
             _output.Received().OutputLine("PowerTube turned off");
 
         }
@@ -240,7 +241,7 @@ namespace MW.Test.Integration
             _powerbutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             _timebutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             _startcancel.Pressed += Raise.EventWith(this, EventArgs.Empty);
-            Thread.Sleep(60700);
+            Thread.Sleep(61000);
             _output.Received().OutputLine("Light is turned off");
 
         }
