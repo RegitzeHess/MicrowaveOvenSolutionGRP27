@@ -233,7 +233,7 @@ namespace MW.Test.Integration
             _output.Received().OutputLine("Light is turned on");
         }
 
-        //17
+        //17 fejler
         [Test]
         public void Cooking_CookingIsDone_LightOff()
         {
