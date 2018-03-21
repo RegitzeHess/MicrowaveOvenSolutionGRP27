@@ -26,9 +26,9 @@ namespace MW.Test.Integration
         private IDisplay _display;
         private IPowerTube _powerTube;
         private ITimer _timer;
-        private IButton _uutPowerButton;
-        private IButton _uutTimeButton;
-        private IButton _uutStartCancel;
+        private IButton _driverPowerButton;
+        private IButton _driverTimeButton;
+        private IButton _driverStartCancel;
         private CookController _cookController;
         private IUserInterface _userInterface;
 
@@ -41,11 +41,11 @@ namespace MW.Test.Integration
             _display = new Display(_output);
             _powerTube = new PowerTube(_output);
             _timer = new Timer();
-            _uutPowerButton = new Button();
-            _uutTimeButton = new Button();
-            _uutStartCancel = new Button();
+            _driverPowerButton = new Button();
+            _driverTimeButton = new Button();
+            _driverStartCancel = new Button();
             _cookController = new CookController(_timer, _display, _powerTube);
-            _userInterface = new UserInterface(_uutPowerButton, _uutTimeButton, _uutStartCancel, _door, _display, _light, _cookController);
+            _userInterface = new UserInterface(_driverPowerButton, _driverTimeButton, _driverStartCancel, _door, _display, _light, _cookController);
             _cookController.UI = _userInterface;
         }
 
@@ -55,7 +55,7 @@ namespace MW.Test.Integration
         {
             _door.Open();
             _door.Close();
-            _uutPowerButton.Press();
+            _driverPowerButton.Press();
             _output.Received().OutputLine("Display shows: 50 W");
         }
 
@@ -63,8 +63,8 @@ namespace MW.Test.Integration
         [Test]
         public void PowerButtonIsPressed2_PowerIs100()
         {
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
             _output.Received().OutputLine("Display shows: 100 W");
         }
 
@@ -72,23 +72,23 @@ namespace MW.Test.Integration
         [Test]
         public void PowerButtonIsPressed15_PowerIs50()
         {
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
             _output.Received().OutputLine("Display shows: 50 W");
         }
 
@@ -96,8 +96,8 @@ namespace MW.Test.Integration
         [Test]
         public void PowerButtonIsPressed_CancelButtonPressed_DisplayClear()
         {
-            _uutPowerButton.Press();
-            _uutStartCancel.Press();
+            _driverPowerButton.Press();
+            _driverStartCancel.Press();
             _output.Received().OutputLine("Display cleared");
         }
 
@@ -105,7 +105,7 @@ namespace MW.Test.Integration
         [Test]
         public void PowerButton_DoorOpened_DisplayClear()
         {
-            _uutPowerButton.Press();
+            _driverPowerButton.Press();
             _door.Open();
             _output.Received().OutputLine("Display cleared");
         }
@@ -114,7 +114,7 @@ namespace MW.Test.Integration
         [Test]
         public void PowerButton_DoorOpened_LightOn()
         {
-            _uutPowerButton.Press();
+            _driverPowerButton.Press();
             _door.Open();
             _output.Received().OutputLine("Light is turned on");
         }
@@ -123,8 +123,8 @@ namespace MW.Test.Integration
         [Test]
         public void PowerButton_TimeButton_Time1()
         {
-            _uutPowerButton.Press();
-            _uutTimeButton.Press();
+            _driverPowerButton.Press();
+            _driverTimeButton.Press();
             _output.Received().OutputLine("Display shows: 01:00");
         }
 
@@ -132,9 +132,9 @@ namespace MW.Test.Integration
         [Test]
         public void PowerButton_2TimeButton_Time2()
         {
-            _uutPowerButton.Press();
-            _uutTimeButton.Press();
-            _uutTimeButton.Press();
+            _driverPowerButton.Press();
+            _driverTimeButton.Press();
+            _driverTimeButton.Press();
             _output.Received().OutputLine("Display shows: 02:00");
         }
 
@@ -142,9 +142,9 @@ namespace MW.Test.Integration
         [Test]
         public void SetTime_StartButton_CookerIsCalled()
         {
-            _uutPowerButton.Press();
-            _uutTimeButton.Press();
-            _uutStartCancel.Press();
+            _driverPowerButton.Press();
+            _driverTimeButton.Press();
+            _driverStartCancel.Press();
             Thread.Sleep(5000);
             _output.Received().OutputLine("Display shows: 00:56");
             Thread.Sleep(56000);
@@ -155,8 +155,8 @@ namespace MW.Test.Integration
         [Test]
         public void SetTime_DoorOpened_DisplayClear()
         {
-            _uutPowerButton.Press();
-            _uutTimeButton.Press();
+            _driverPowerButton.Press();
+            _driverTimeButton.Press();
             _door.Open();
             _output.Received().OutputLine("Display cleared");
         }
@@ -165,8 +165,8 @@ namespace MW.Test.Integration
         [Test]
         public void SetTime_DoorOpenn_LightOn()
         {
-            _uutPowerButton.Press();
-            _uutTimeButton.Press();
+            _driverPowerButton.Press();
+            _driverTimeButton.Press();
             _door.Open();
             _output.Received().OutputLine("Light is turned on");
         }
@@ -175,13 +175,13 @@ namespace MW.Test.Integration
         [Test]
         public void Ready_PowerAndTime_CookerIsCalledCorrect()
         {
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutTimeButton.Press();
-            _uutTimeButton.Press();
-            _uutStartCancel.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverTimeButton.Press();
+            _driverTimeButton.Press();
+            _driverStartCancel.Press();
             _output.Received().OutputLine("Display shows: 02:00");
             _output.Received().OutputLine("Display shows: 200 W");
 
@@ -191,23 +191,23 @@ namespace MW.Test.Integration
         [Test]
         public void Ready_FullPower_CookerIsCalled()
         {
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
-            _uutPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
+            _driverPowerButton.Press();
 
-            _uutTimeButton.Press();
-            _uutStartCancel.Press();
+            _driverTimeButton.Press();
+            _driverStartCancel.Press();
 
             _output.Received().OutputLine("Display shows: 700 W");
             _output.Received().OutputLine("PowerTube works with 100 %");
@@ -217,9 +217,9 @@ namespace MW.Test.Integration
         [Test]
         public void SetTime_StartButton_LightIsCalled()
         {
-            _uutPowerButton.Press();
-            _uutTimeButton.Press();
-            _uutStartCancel.Press();
+            _driverPowerButton.Press();
+            _driverTimeButton.Press();
+            _driverStartCancel.Press();
             _output.Received().OutputLine("Light is turned on");
         }
 
@@ -227,9 +227,9 @@ namespace MW.Test.Integration
         [Test]
         public void Cooking_CookingIsDone_LightOff()
         {
-            _uutPowerButton.Press();
-            _uutTimeButton.Press();
-            _uutStartCancel.Press();
+            _driverPowerButton.Press();
+            _driverTimeButton.Press();
+            _driverStartCancel.Press();
             Thread.Sleep(60700);
             _output.Received().OutputLine("Light is turned off");
 
@@ -239,9 +239,9 @@ namespace MW.Test.Integration
         [Test]
         public void Cooking_CookingIsDone_DisplayIsCleared()
         {
-            _uutPowerButton.Press();
-            _uutTimeButton.Press();
-            _uutStartCancel.Press();
+            _driverPowerButton.Press();
+            _driverTimeButton.Press();
+            _driverStartCancel.Press();
             Thread.Sleep(60300);
             _output.Received().OutputLine("Display cleared");
         }
@@ -250,9 +250,9 @@ namespace MW.Test.Integration
         [Test]
         public void Cooking_DoorIsOpened_CookerCalled()
         {
-            _uutPowerButton.Press();
-            _uutTimeButton.Press();
-            _uutStartCancel.Press();
+            _driverPowerButton.Press();
+            _driverTimeButton.Press();
+            _driverStartCancel.Press();
             _door.Open();
             _output.Received().OutputLine("Light is turned on");
 
@@ -262,10 +262,10 @@ namespace MW.Test.Integration
         [Test]
         public void Cooking_CancelButton_CookerCalled()
         {
-            _uutPowerButton.Press();
-            _uutTimeButton.Press();
-            _uutStartCancel.Press();
-            _uutStartCancel.Press();
+            _driverPowerButton.Press();
+            _driverTimeButton.Press();
+            _driverStartCancel.Press();
+            _driverStartCancel.Press();
             _output.Received().OutputLine("Light is turned off");
         }
 
@@ -273,10 +273,10 @@ namespace MW.Test.Integration
         [Test]
         public void Cooking_CancelButton_LightCalled()
         {
-            _uutPowerButton.Press();
-            _uutTimeButton.Press();
-            _uutStartCancel.Press();
-            _uutStartCancel.Press();
+            _driverPowerButton.Press();
+            _driverTimeButton.Press();
+            _driverStartCancel.Press();
+            _driverStartCancel.Press();
             Thread.Sleep(500);
             _output.Received().OutputLine("Light is turned off");
 

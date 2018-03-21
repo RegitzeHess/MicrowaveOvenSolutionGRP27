@@ -26,7 +26,7 @@ namespace MW.Test.Integration
         private IButton _timebutton;
         private IButton _startcancel;
         private CookController _cookcontroller;
-        private UserInterface _uut;
+        private UserInterface _driver;
 
         [SetUp]
         public void SetUp()
@@ -43,8 +43,8 @@ namespace MW.Test.Integration
             _startcancel = Substitute.For<IButton>();
 
             _cookcontroller = new CookController(_timer, _display, _powertube);
-            _uut = new UserInterface(_powerbutton, _timebutton, _startcancel, _door, _display, _light, _cookcontroller);
-            _cookcontroller.UI = _uut;
+            _driver = new UserInterface(_powerbutton, _timebutton, _startcancel, _door, _display, _light, _cookcontroller);
+            _cookcontroller.UI = _driver;
         }
         
         //1

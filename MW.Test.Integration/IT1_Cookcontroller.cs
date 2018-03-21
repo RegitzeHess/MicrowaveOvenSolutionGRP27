@@ -25,7 +25,7 @@ namespace MW.Test.Integration
         private IUserInterface _userInterface;
         private IOutput _output;
 
-        private CookController _uut;
+        private CookController _driver;
 
 
         [SetUp]
@@ -40,14 +40,14 @@ namespace MW.Test.Integration
             _powertube = new PowerTube(_output);
 
             _userInterface = Substitute.For<IUserInterface>();
-            _uut = new CookController(_timer, _display, _powertube) {UI = _userInterface};
+            _driver = new CookController(_timer, _display, _powertube) {UI = _userInterface};
         }
        
         //test om cooking starter med valide værdier
         [Test]
         public void StartCooking_100power_2time_IsValid()
         {
-            _uut.StartCooking(100, 2);
+            _driver.StartCooking(100, 2);
 
             _output.Received().OutputLine(Arg.Is<string>(_string => _string.ToLower().Contains("works") && _string.ToLower().Contains("2")));
         }
@@ -61,7 +61,7 @@ namespace MW.Test.Integration
 
         public void StartCooking_TooHighOrTooLowOrInvalidPower(int power, int time)
         {
-            Assert.That(() => _uut.StartCooking(power, time), Throws.TypeOf<ArgumentOutOfRangeException>());
+            Assert.That(() => _driver.StartCooking(power, time), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
         
         //efter et tick skal output være lig tid på display
@@ -69,7 +69,7 @@ namespace MW.Test.Integration
         public void Cooking_AfterOneTick_DisplayShowsTheNewTime()
         {
             //DENNE TEST FEJLEDE, DA DER VAR FEJL I COOKCONTROLLER OG TIMERS FORSTÅELSE AF TID. ÆNDREDE I CONTROLLEREN
-           _uut.StartCooking(100, 2);
+           _driver.StartCooking(100, 2);
             Thread.Sleep(2000); 
             _output.Received().OutputLine(Arg.Is<string>(_string => _string.ToLower().Contains("00:01")));
             _output.Received().OutputLine(Arg.Is<string>(_string => _string.Contains("00:00")));
@@ -81,7 +81,7 @@ namespace MW.Test.Integration
         [Test]
         public void Cooking_TimerExpired_PowerTubeOff()
         {
-            _uut.StartCooking(100, 2);
+            _driver.StartCooking(100, 2);
             Thread.Sleep(2100);
             _output.Received().OutputLine("PowerTube turned off"); 
         }
@@ -91,7 +91,7 @@ namespace MW.Test.Integration
         [Test]
         public void Cooking_TimerExpired_UICalled()
         {
-            _uut.StartCooking(100, 2);
+            _driver.StartCooking(100, 2);
             Thread.Sleep(2100);
             _userInterface.Received().CookingIsDone();
         }
@@ -102,9 +102,9 @@ namespace MW.Test.Integration
         [Test]
         public void Cooking_Stop_DisplayShowsThatPowerTubeIsStoped()
         {
-            _uut.StartCooking(100,2);
+            _driver.StartCooking(100,2);
             Thread.Sleep(2001);
-            _uut.Stop();
+            _driver.Stop();
             _output.Received().OutputLine("PowerTube turned off"); 
         }
 
