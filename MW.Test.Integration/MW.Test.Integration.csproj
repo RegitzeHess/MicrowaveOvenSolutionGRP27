@@ -60,7 +60,6 @@
     <Compile Include="IT2_UserInterface.cs" />
     <Compile Include="IT3_Button.cs" />
     <Compile Include="IT3_Door.cs" />
-    <Compile Include="IT4_Output.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
