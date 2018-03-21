@@ -48,6 +48,7 @@ namespace MW.Test.Integration
             _userInterface = new UserInterface(_uutPowerButton, _uutTimeButton, _uutStartCancel, _door, _display, _light, _cookController);
         }
 
+        //1
         [Test]
         public void PowerButtonIsPressed_PowerIs50()
         {
@@ -57,6 +58,7 @@ namespace MW.Test.Integration
             _output.Received().OutputLine("Display shows: 50 W");
         }
 
+        //2
         [Test]
         public void PowerButtonIsPressed2_PowerIs100()
         {
@@ -65,6 +67,7 @@ namespace MW.Test.Integration
             _output.Received().OutputLine("Display shows: 100 W");
         }
 
+        //3
         [Test]
         public void PowerButtonIsPressed15_PowerIs50()
         {
@@ -88,6 +91,7 @@ namespace MW.Test.Integration
             _output.Received().OutputLine("Display shows: 50 W");
         }
 
+        //4
         [Test]
         public void PowerButtonIsPressed_CancelButtonPressed_DisplayClear()
         {
@@ -96,6 +100,7 @@ namespace MW.Test.Integration
             _output.Received().OutputLine("Display cleared");
         }
 
+        //5
         [Test]
         public void PowerButton_DoorOpened_DisplayClear()
         {
@@ -104,6 +109,7 @@ namespace MW.Test.Integration
             _output.Received().OutputLine("Display cleared");
         }
 
+        //6
         [Test]
         public void PowerButton_DoorOpened_LightOn()
         {
@@ -112,6 +118,7 @@ namespace MW.Test.Integration
             _output.Received().OutputLine("Light is turned on");
         }
 
+        //7
         [Test]
         public void PowerButton_TimeButton_Time1()
         {
@@ -120,6 +127,7 @@ namespace MW.Test.Integration
             _output.Received().OutputLine("Display shows: 01:00");
         }
 
+        //8
         [Test]
         public void PowerButton_2TimeButton_Time2()
         {
@@ -129,6 +137,7 @@ namespace MW.Test.Integration
             _output.Received().OutputLine("Display shows: 02:00");
         }
 
+        //9
         [Test]
         public void SetTime_StartButton_CookerIsCalled()
         {
@@ -137,8 +146,11 @@ namespace MW.Test.Integration
             _uutStartCancel.Press();
             Thread.Sleep(5000);
             _output.Received().OutputLine("Display shows: 00:56");
+            Thread.Sleep(55200);
+            _output.Received().OutputLine("PowerTube turned off");
         }
 
+        //10
         [Test]
         public void SetTime_DoorOpened_DisplayClear()
         {
@@ -148,6 +160,7 @@ namespace MW.Test.Integration
             _output.Received().OutputLine("Display cleared");
         }
 
+        //11
         [Test]
         public void SetTime_DoorOpenn_LightOn()
         {
@@ -157,6 +170,7 @@ namespace MW.Test.Integration
             _output.Received().OutputLine("Light is turned on");
         }
 
+        //12
         [Test]
         public void Ready_PowerAndTime_CookerIsCalledCorrect()
         {
@@ -172,6 +186,7 @@ namespace MW.Test.Integration
 
         }
 
+        //13
         [Test]
         public void Ready_FullPower_CookerIsCalled()
         {
@@ -197,6 +212,7 @@ namespace MW.Test.Integration
             _output.Received().OutputLine("PowerTube works with 100 %");
         }
 
+        //14
         [Test]
         public void SetTime_StartButton_LightIsCalled()
         {
@@ -204,6 +220,66 @@ namespace MW.Test.Integration
             _uutTimeButton.Press();
             _uutStartCancel.Press();
             _output.Received().OutputLine("Light is turned on");
+        }
+
+        //15
+        [Test]
+        public void Cooking_CookingIsDone_LightOff()
+        {
+            _uutPowerButton.Press();
+            _uutTimeButton.Press();
+            _uutStartCancel.Press();
+            Thread.Sleep(60700);
+            _output.Received().OutputLine("Light is turned off");
+
+        }
+
+        //16
+        [Test]
+        public void Cooking_CookingIsDone_DisplayIsCleared()
+        {
+            _uutPowerButton.Press();
+            _uutTimeButton.Press();
+            _uutStartCancel.Press();
+            Thread.Sleep(60300);
+            _output.Received().OutputLine("Display cleared");
+        }
+
+        //17
+        [Test]
+        public void Cooking_DoorIsOpened_CookerCalled()
+        {
+            _uutPowerButton.Press();
+            _uutTimeButton.Press();
+            _uutStartCancel.Press();
+            _door.Open();
+            _output.Received().OutputLine("Light is turned on");
+
+        }
+
+        //18
+        [Test]
+        public void Cooking_CancelButton_CookerCalled()
+        {
+            _uutPowerButton.Press();
+            _uutTimeButton.Press();
+            _uutStartCancel.Press();
+            _uutStartCancel.Press();
+            _output.Received().OutputLine("Light is turned off");
+        }
+
+        //19
+        [Test]
+        public void Cooking_CancelButton_LightCalled()
+        {
+            _uutPowerButton.Press();
+            _uutTimeButton.Press();
+            _uutStartCancel.Press();
+            //Thread.Sleep(60500); //sætter til 1 min og 2 millisek
+            _uutStartCancel.Press();
+            Thread.Sleep(500);
+            _output.Received().OutputLine("Light is turned off");
+
         }
 
     }
