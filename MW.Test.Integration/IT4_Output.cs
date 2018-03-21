@@ -14,7 +14,7 @@ using Timer = MicrowaveOvenClasses.Boundary.Timer;
 
 namespace MW.Test.Integration
 {
-    public class IT2_UserInterface
+    public class IT4_Output
     {
         private IOutput _output;
         private ILight _light;
@@ -45,14 +45,14 @@ namespace MW.Test.Integration
             _cookcontroller = new CookController(_timer, _display, _powertube) { UI = _uut };
             _uut = new UserInterface(_powerbutton, _timebutton, _startcancel, _door, _display, _light, _cookcontroller);
         }
-        
+
         //1
         [Test]
         public void Ready_DoorOpen_LightOn()
         {
             _door.Opened += Raise.EventWith(this, EventArgs.Empty); //vi raiser et event, da vi ikke kan kalde metoden på vores fake. Magen til metoden i unittesten
             _output.Received().OutputLine("Light is turned on");
-            
+
         }
         //2
         [Test]
@@ -148,7 +148,7 @@ namespace MW.Test.Integration
             _output.Received().OutputLine("Display shows: 02:00");
         }
 
-       
+
         //11
         [Test]
         public void SetTime_StartButton_CookerIsCalled()
@@ -183,7 +183,7 @@ namespace MW.Test.Integration
             _output.Received().OutputLine("Light is turned on");
 
         }
-        
+
         //14
         [Test]
         public void Ready_PowerAndTime_CookerIsCalledCorrectly()
@@ -194,7 +194,7 @@ namespace MW.Test.Integration
             _timebutton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             _startcancel.Pressed += Raise.EventWith(this, EventArgs.Empty);
             Thread.Sleep(100);
-            _output.Received().OutputLine("PowerTube works with 14,2857142857143 %"); 
+            _output.Received().OutputLine("PowerTube works with 14,2857142857143 %");
         }
 
         //15
@@ -290,11 +290,7 @@ namespace MW.Test.Integration
             _startcancel.Pressed += Raise.EventWith(this, EventArgs.Empty);
             Thread.Sleep(500);
             _output.Received().OutputLine("Light is turned off");
-            
+
         }
-
-        
-        //MAIKEN HAR EN TEST HVOR HUN TESTER AT TIDEN GÅR NÅR COOKER ER I GANG?
-
     }
 }
